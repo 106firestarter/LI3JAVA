@@ -22,8 +22,8 @@ import java.util.logging.Logger;
 
 public class GESTHIPER {
     
-    public static HashMap<String,String> listaClientes;
-    public static HashMap<String,String> listaProdutos;
+    public static HashMap<String,Cliente> listaClientes;
+    public static HashMap<String,Produtos> listaProdutos;
 
      public static void carrega_produtos(String string){
 
@@ -35,7 +35,7 @@ public class GESTHIPER {
              String text = null;
 
     while ((text = reader.readLine()) != null) {
-        listaProdutos.put(text, text);
+        listaProdutos.put(text, new Produtos(text));
         //System.out.println(text);
     }
          } catch (FileNotFoundException ex) {
@@ -58,7 +58,7 @@ public class GESTHIPER {
 
     while ((text = reader.readLine()) != null) {
         //System.out.println(text);
-        listaClientes.put(text, text);
+        listaClientes.put(text, new Cliente(text));
     }
          } catch (FileNotFoundException ex) {
              Logger.getLogger(GESTHIPER.class.getName()).log(Level.SEVERE, null, ex);
