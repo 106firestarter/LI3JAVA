@@ -22,10 +22,10 @@ import java.util.logging.Logger;
 
 public class GESTHIPER {
     
-    public static HashMap<String,Cliente> listaClientes;
-    public static HashMap<String,Produtos> listaProdutos;
+    private HashMap<String,Cliente> listaClientes;
+    private HashMap<String,Produtos> listaProdutos;
 
-     public static void carrega_produtos(String string){
+     public void carrega_produtos(String string){
 
          File file = new File(string);
          BufferedReader reader = null;
@@ -47,7 +47,7 @@ public class GESTHIPER {
 
 }
      
-     public static void carrega_clientes(String string){
+     public void carrega_clientes(String string){
 
          File file = new File(string);
          BufferedReader reader = null;
@@ -72,12 +72,13 @@ public class GESTHIPER {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        listaClientes = new HashMap<>();
-        listaProdutos = new HashMap<>();
+        GESTHIPER main = new GESTHIPER();
+        main.listaClientes = new HashMap<>();
+        main.listaProdutos = new HashMap<>();
         String produtos = "FichProdutos.txt";
-        carrega_produtos(produtos);
+        main.carrega_produtos(produtos);
         String clientes = "FichClientes.txt";
-        carrega_clientes(clientes);
+        main.carrega_clientes(clientes);
         
     }
     

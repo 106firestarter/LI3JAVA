@@ -11,7 +11,7 @@ package gesthiper;
  */
 public class Cliente {
     
-    String id;
+    private String id;
 
     public Cliente(String id) {
         this.id = id;
