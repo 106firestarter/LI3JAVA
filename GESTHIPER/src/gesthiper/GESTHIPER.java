@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +25,7 @@ public class GESTHIPER {
     
     private HashMap<String,Cliente> listaClientes;
     private HashMap<String,Produtos> listaProdutos;
+    private TreeSet<Compra> TreeCompras;
 
      public void carrega_produtos(String string){
 
@@ -45,6 +47,36 @@ public class GESTHIPER {
          }
 
 
+}
+     public void parse_compra(String compra){
+         
+         String parts[] = compra.split(" ");
+         Compra novaCompra;
+        novaCompra = new Compra(parts[4],parts[0],Integer.parseInt(parts[2]),Float.parseFloat(parts[1]),parts[3].charAt(0),Integer.parseInt(parts[5]));
+        //System.out.println(novaCompra.toString()); 
+        this.TreeCompras.add(novaCompra);
+        
+     }
+     public void carrega_compras(String string){
+
+         File file = new File(string);
+         BufferedReader reader = null;
+         
+         try {
+             reader = new BufferedReader(new FileReader(file));
+             String text = null;
+
+    while ((text = reader.readLine()) != null) {
+        //System.out.println(text);
+        parse_compra(text);
+    }
+         } catch (FileNotFoundException ex) {
+             Logger.getLogger(GESTHIPER.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IOException ex) {
+             Logger.getLogger(GESTHIPER.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+         System.out.println(TreeCompras.toString());
 }
      
      public void carrega_clientes(String string){
@@ -68,6 +100,8 @@ public class GESTHIPER {
 
 
 }
+     
+     
     /**
      * @param args the command line arguments
      */
@@ -75,11 +109,13 @@ public class GESTHIPER {
         GESTHIPER main = new GESTHIPER();
         main.listaClientes = new HashMap<>();
         main.listaProdutos = new HashMap<>();
+        main.TreeCompras = new TreeSet<>(new comprasComparator());
         String produtos = "FichProdutos.txt";
         main.carrega_produtos(produtos);
         String clientes = "FichClientes.txt";
         main.carrega_clientes(clientes);
-        
-    }
+        String compras = "Compras.txt";
+        main.carrega_compras(compras);
+            }
     
 }
