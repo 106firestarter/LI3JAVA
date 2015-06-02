@@ -26,6 +26,7 @@ public class GESTHIPER {
     private HashMap<String,Cliente> listaClientes;
     private HashMap<String,Produtos> listaProdutos;
     private TreeSet<Compra> TreeCompras;
+    private CatalogoCompras catalogoCompras;
 
      public void carrega_produtos(String string){
 
@@ -55,6 +56,7 @@ public class GESTHIPER {
         novaCompra = new Compra(parts[4],parts[0],Integer.parseInt(parts[2]),Float.parseFloat(parts[1]),parts[3].charAt(0),Integer.parseInt(parts[5]));
         //System.out.println(novaCompra.toString()); 
         this.TreeCompras.add(novaCompra);
+        catalogoCompras.insere_compra(novaCompra);
         
      }
      public void carrega_compras(String string){
@@ -75,8 +77,7 @@ public class GESTHIPER {
          } catch (IOException ex) {
              Logger.getLogger(GESTHIPER.class.getName()).log(Level.SEVERE, null, ex);
          }
-
-         System.out.println(TreeCompras.toString());
+System.out.println(catalogoCompras.toString());
 }
      
      public void carrega_clientes(String string){
@@ -110,6 +111,7 @@ public class GESTHIPER {
         main.listaClientes = new HashMap<>();
         main.listaProdutos = new HashMap<>();
         main.TreeCompras = new TreeSet<>(new comprasComparator());
+        main.catalogoCompras = new CatalogoCompras();
         String produtos = "FichProdutos.txt";
         main.carrega_produtos(produtos);
         String clientes = "FichClientes.txt";
