@@ -5,13 +5,14 @@
  */
 package gesthiper;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
  *
  * @author 72
  */
-public class Compra {
+public class Compra implements Serializable{
     
     private String id_cliente;
     private String id_produto;
@@ -88,7 +89,7 @@ public class Compra {
     
 }
 
-class comprasComparator implements Comparator<Compra>{
+class comprasComparator implements Comparator<Compra>, Serializable{
     
     @Override
     public int compare(Compra c1, Compra c2){

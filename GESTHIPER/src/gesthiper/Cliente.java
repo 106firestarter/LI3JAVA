@@ -5,11 +5,13 @@
  */
 package gesthiper;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 72
  */
-public class Cliente {
+public class Cliente implements Serializable{
     
     private String id;
 

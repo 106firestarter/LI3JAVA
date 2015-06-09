@@ -1,7 +1,9 @@
 
 package gesthiper;
 
-public class Produtos {
+import java.io.Serializable;
+
+public class Produtos implements Serializable {
     
     private String id;
 

@@ -5,15 +5,17 @@
  */
 package gesthiper;
 
+import java.io.Serializable;
+import java.util.Comparator;
 import java.util.HashMap;
 
 /**
  *
  * @author 72
  */
-public class ComprasClientes {
+public class ComprasClientes implements Serializable {
     private String id_cliente;
-    private int n_compras;
+    public int n_compras;
     private HashMap<String,wrapperProdutos> produtosComprados;
     
     public void insereWrapperProduto(String id_produto, int quantidade){
@@ -52,7 +54,7 @@ public class ComprasClientes {
     
     
 
-    class wrapperProdutos {
+    class wrapperProdutos implements Serializable {
         
         public String id_produto;
         public int n_compras;
@@ -70,6 +72,10 @@ public class ComprasClientes {
         
         
     }
+    
+    
+    
+    
 
     @Override
     public String toString() {
