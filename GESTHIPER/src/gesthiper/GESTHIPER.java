@@ -76,7 +76,8 @@ public class GESTHIPER implements Serializable{
         //System.out.println(novaCompra.toString());
         if(existe_produto(parts[0])&& existe_cliente(parts[4])){
         this.TreeCompras.add(novaCompra);
-        catalogoCompras.insere_compra(novaCompra);
+        catalogoCompras.insere_compra_cliente(novaCompra);
+        catalogoCompras.insere_compra_produto(novaCompra);
         }
         else{
             comprasInvalidas.add(novaCompra);
@@ -168,7 +169,9 @@ public class GESTHIPER implements Serializable{
             main.carrega_clientes(clientes);
             String compras = "Compras.txt";
             main.carrega_compras(compras);
-            
+            //main.catalogoCompras.query_2();
+            //System.out.println(main.catalogoCompras.mes_facturado[1]);
+            main.catalogoCompras.query3(1);
             //System.out.println("Comprás inválidas:" + main.comprasInvalidas.size());
         } 
             

@@ -17,9 +17,20 @@ public class ComprasClientes implements Serializable {
     private String id_cliente;
     public int n_compras;
     private HashMap<String,wrapperProdutos> produtosComprados;
+    float total_facturado;
+
+    public HashMap<String, wrapperProdutos> getProdutosComprados() {
+        return produtosComprados;
+    }
+
+    public void setProdutosComprados(HashMap<String, wrapperProdutos> produtosComprados) {
+        this.produtosComprados = produtosComprados;
+    }
     
-    public void insereWrapperProduto(String id_produto, int quantidade){
-        
+    
+    
+    public void insereWrapperProduto(String id_produto, int quantidade, float valor){
+        this.total_facturado +=valor;
         if(produtosComprados.containsKey(id_produto)){
             wrapperProdutos aux = produtosComprados.get(id_produto);
             aux.quantidade += quantidade;
@@ -33,6 +44,7 @@ public class ComprasClientes implements Serializable {
     public ComprasClientes(String id_cliente) {
         this.id_cliente = id_cliente;
         this.n_compras = 1;
+        this.total_facturado = 0f;
         produtosComprados = new HashMap();
     }
 
