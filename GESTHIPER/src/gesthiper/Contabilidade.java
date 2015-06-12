@@ -6,6 +6,7 @@
 package gesthiper;
 
 import gesthiper.ComprasProdutos.wrapperClientes;
+import gesthiper.Wrappers.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -115,7 +116,8 @@ public class Contabilidade {
         // System.out.println(setCompras.get(12).toString());
     }
    
-   public ArrayList<String> query_1() {
+   public wrapperQuery1 query_1() {
+       wrapperQuery1 res1;
         ArrayList<String> lista = new ArrayList();
         TreeSet compras_aux = setComprasProdutos.get(12);
         Iterator<ComprasProdutos> it = compras_aux.iterator();
@@ -126,10 +128,12 @@ public class Contabilidade {
             cc = it.next();
         }
         Collections.sort(lista);
-        return lista;
+        res1 = new wrapperQuery1(lista, total_compras);
+        return res1;
     }
    
-   public void query8(int x){
+   public wrapperQuery8 query8(int x){
+       wrapperQuery8 res8;
         int i = 0;
         ArrayList<String> lista = new ArrayList<>();
         int clientes_distintos[] = new int[x];
@@ -139,15 +143,15 @@ public class Contabilidade {
             ComprasProdutos cc = it.next();
             lista.add(cc.getId_produto());
             clientes_distintos[i] = cc.getClientesComprados().size();
-            System.out.println(cc.getId_produto());
-            System.out.println(cc.getQuantidade());
-            System.out.println(cc.getDistintos());
+            
             i++;
         }
+        res8 = new wrapperQuery8(lista, clientes_distintos);
+        return res8;
     }
    
-   public void query10(String id_cliente, int x){
-        
+   public wrapperQuery10 query10(String id_cliente, int x){
+        wrapperQuery10 res10;
         List<wrapperClientes> lista = new ArrayList<>();
         for(wrapperClientes c: hashComprasProdutos.get(12).get(id_cliente).getClientesComprados().values()){
             lista.add(c);
@@ -164,14 +168,16 @@ public class Contabilidade {
             });
         
         int i = 0;
-        
+        ArrayList<String> aux= new ArrayList<>();
+        float facturacao[] = new float[x];
         while(i<x && i <lista.size()){
-            System.out.println(lista.get(i).id_cliente);
-            System.out.println(lista.get(i).quantidade);
-            System.out.println(lista.get(i).facturacao);
+            aux.add(lista.get(i).id_cliente);
+           
+             facturacao[i]=lista.get(i).facturacao;
             i++;
         }
-      
+      res10 = new wrapperQuery10(aux, facturacao);
+      return res10;
     }
    
    public void query5(String produto) {

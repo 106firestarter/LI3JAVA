@@ -6,6 +6,7 @@
 package gesthiper;
 
 import gesthiper.ComprasClientes.wrapperProdutos;
+import gesthiper.Wrappers.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -55,7 +56,9 @@ public class CatalogoCompras implements Serializable {
         this.comprasMes = comprasMes;
     }
     
-    public void query9(int x){
+    public wrapperQuery9 query9(int x){
+       
+        wrapperQuery9 res9;
         int i = 0;
         ArrayList<String> lista = new ArrayList<>();
         int clientes_distintos[] = new int[x];
@@ -69,6 +72,8 @@ public class CatalogoCompras implements Serializable {
             System.out.println(cc.getDistintos());
             i++;
         }
+        res9 = new wrapperQuery9(lista, clientes_distintos);
+        return res9;
     }
 
     public void insere_compra_cliente(Compra novaCompra) {
@@ -112,7 +117,8 @@ public class CatalogoCompras implements Serializable {
         // System.out.println(setCompras.get(12).toString());
     }
 
-    public ArrayList<String> query_2() {
+    public wrapperQuery2 query_2() {
+        wrapperQuery2 res2;
         ArrayList<String> lista = new ArrayList();
         TreeSet compras_aux = setComprasClientes.get(12);
         Iterator<ComprasClientes> it = compras_aux.iterator();
@@ -125,43 +131,50 @@ public class CatalogoCompras implements Serializable {
         }
         Collections.sort(lista);
         //System.out.println(lista);
-        return lista;
+        res2 = new wrapperQuery2(lista,lista.size());
+        return res2;
     }
 
-    public void query3(int mes) {
-
+    public wrapperQuery3 query3(int mes) {
+        
+        wrapperQuery3 res3;
         int novo_mes = mes - 1;
         HashMap map = hashComprasClientes.get(novo_mes);
         int n_compras = comprasMes[novo_mes];
         int clientes_distintos = map.size();
-       
+        res3= new wrapperQuery3(total_compras, clientes_distintos);
+        
+        return res3;      
     }
     
     
 
-    public void query4(String cliente) {
-
+    public wrapperQuery4 query4(String cliente) {
+        wrapperQuery4 res4;
         int i = 0;
-        int n_produtos;
-        int n_compras;
-        float facturado;
+        int n_produtos[] = new int[12];
+        int n_compras[] = new int[12];
+        float facturado[] = new float[12];
         float t_facturado = 0;
         while (i < 12) {
             HashMap<String,ComprasClientes> map = hashComprasClientes.get(i);
             if (map.containsKey(cliente)) {
-                n_compras = map.get(cliente).getN_compras();
-                n_produtos = map.get(cliente).getProdutosComprados().size();
-                facturado = map.get(cliente).total_facturado;
+                n_compras[i] = map.get(cliente).getN_compras();
+                n_produtos[i] = map.get(cliente).getProdutosComprados().size();
+                facturado[i] = map.get(cliente).total_facturado;
                 t_facturado += map.get(cliente).total_facturado;
                 
             }
             i++;
         }
-
+        
+        res4 = new wrapperQuery4(n_compras, n_produtos, facturado, total_facturado);
+        return res4;
     }
     
-    public void query7(String id_cliente){
+    public wrapperQuery7 query7(String id_cliente,int x){
         
+        wrapperQuery7 res7;
         List<wrapperProdutos> lista = new ArrayList<>();
         for(wrapperProdutos c: hashComprasClientes.get(12).get(id_cliente).getProdutosComprados().values()){
             lista.add(c);
@@ -176,8 +189,16 @@ public class CatalogoCompras implements Serializable {
             return res;
                     }
             });
-        
-      
+      ArrayList<String> res = new ArrayList<>();
+      int i = 0;
+      int quantos[] = new int[x];
+      while(i<x){
+          res.add(lista.get(i).getId_produto());
+          quantos[x]=lista.get(i).getQuantidade();
+          i++;
+      }
+      res7 = new wrapperQuery7(res, quantos);
+      return res7;
     }
 
     class comprasClientesComparator implements Comparator<ComprasClientes>, Serializable {
