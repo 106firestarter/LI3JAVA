@@ -38,6 +38,7 @@ public class GESTHIPER implements Serializable{
     private TreeSet<Compra> TreeCompras;
     private ArrayList<Compra> comprasInvalidas;
     private CatalogoCompras catalogoCompras;
+    private Contabilidade contabilidade;
     
     public boolean existe_cliente(String cliente){
         return listaClientes.containsKey(cliente);
@@ -77,7 +78,7 @@ public class GESTHIPER implements Serializable{
         if(existe_produto(parts[0])&& existe_cliente(parts[4])){
         this.TreeCompras.add(novaCompra);
         catalogoCompras.insere_compra_cliente(novaCompra);
-        catalogoCompras.insere_compra_produto(novaCompra);
+        contabilidade.insere_compra_produto(novaCompra);
         }
         else{
             comprasInvalidas.add(novaCompra);
@@ -163,6 +164,7 @@ public class GESTHIPER implements Serializable{
             main.comprasInvalidas = new ArrayList();
             main.TreeCompras = new TreeSet(new comprasComparator());
             main.catalogoCompras = new CatalogoCompras();
+            main.contabilidade = new Contabilidade();
             String produtos = "FichProdutos.txt";
             main.carrega_produtos(produtos);
             String clientes = "FichClientes.txt";

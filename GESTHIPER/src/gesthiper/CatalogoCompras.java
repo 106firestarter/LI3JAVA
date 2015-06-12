@@ -20,17 +20,15 @@ import java.util.TreeSet;
 public class CatalogoCompras implements Serializable {
 
     private ArrayList<HashMap<String, ComprasClientes>> hashComprasClientes;
-     public ArrayList<HashMap<String, ComprasProdutos>> hashComprasProdutos;
-    private int comprasMes[];
+       private int comprasMes[];
     private int total_compras;
-    private ArrayList<TreeSet<ComprasClientes>> setCompras;
+    private ArrayList<TreeSet<ComprasClientes>> setComprasClientes;
     public float total_facturado;
     public float mes_facturado[];
 
     public CatalogoCompras() {
         hashComprasClientes = new ArrayList();
-        hashComprasProdutos = new ArrayList();
-        setCompras = new ArrayList();
+         setComprasClientes = new ArrayList();
         comprasMes = new int[13];
         mes_facturado = new float[13];
         total_compras = 0;
@@ -40,8 +38,7 @@ public class CatalogoCompras implements Serializable {
             comprasMes[i] = 0;
             mes_facturado[i] = 0;
             hashComprasClientes.add(new HashMap());
-            hashComprasProdutos.add(new HashMap());
-            setCompras.add(new TreeSet(new comprasClientesComparator()));
+             setComprasClientes.add(new TreeSet(new comprasClientesComparator()));
             i++;
         }
     }
@@ -83,37 +80,12 @@ public class CatalogoCompras implements Serializable {
         }
     }
     
-    public void insere_compra_produto(Compra novaCompra) {
-
-        int mes = novaCompra.getMes() - 1;
-        HashMap<String, ComprasProdutos> aux;
-        aux = hashComprasProdutos.get(mes);
-        HashMap<String, ComprasProdutos> aux1;
-        aux1 = hashComprasProdutos.get(12);
-       // total_facturado += novaCompra.getPreco()*novaCompra.getQuantidade();
-        comprasMes[mes]++;
-        if (aux.containsKey(novaCompra.getId_cliente())) {
-            aux.get(novaCompra.getId_produto()).setN_compras(aux.get(novaCompra.getId_produto()).getN_compras() + 1);
-            aux.get(novaCompra.getId_produto()).insereWrapperCliente(novaCompra.getId_produto(), novaCompra.getQuantidade(),novaCompra.getPreco()*novaCompra.getQuantidade());
-        } else {
-            ComprasProdutos novo = new ComprasProdutos(novaCompra.getId_produto());
-            novo.insereWrapperCliente(novaCompra.getId_cliente(), novaCompra.getQuantidade(),novaCompra.getPreco()*novaCompra.getQuantidade());
-            aux.put(novaCompra.getId_produto(), novo);
-        }
-        if (aux1.containsKey(novaCompra.getId_cliente())) {
-            aux1.get(novaCompra.getId_produto()).setN_compras(aux1.get(novaCompra.getId_produto()).getN_compras() + 1);
-            aux1.get(novaCompra.getId_produto()).insereWrapperCliente(novaCompra.getId_produto(), novaCompra.getQuantidade(),novaCompra.getPreco()*novaCompra.getQuantidade());
-        } else {
-            ComprasProdutos novo = new ComprasProdutos(novaCompra.getId_produto());
-            novo.insereWrapperCliente(novaCompra.getId_cliente(), novaCompra.getQuantidade(),novaCompra.getPreco()*novaCompra.getQuantidade());
-            aux1.put(novaCompra.getId_produto(), novo);
-        }
-    }
+    
 
     public void preenche_tree() {
         for (ComprasClientes value : hashComprasClientes.get(12).values()) {
 
-            setCompras.get(12).add(value);
+            setComprasClientes.get(12).add(value);
         }
 
         // System.out.println(setCompras.get(12).toString());
@@ -121,7 +93,7 @@ public class CatalogoCompras implements Serializable {
 
     public ArrayList<String> query_2() {
         ArrayList<String> lista = new ArrayList();
-        TreeSet compras_aux = setCompras.get(12);
+        TreeSet compras_aux = setComprasClientes.get(12);
         Iterator<ComprasClientes> it = compras_aux.iterator();
         ComprasClientes cc = it.next();
         //System.out.println("pila");
