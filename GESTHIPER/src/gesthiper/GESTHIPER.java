@@ -59,6 +59,7 @@ public class GESTHIPER implements Serializable{
 
     while ((text = reader.readLine()) != null) {
         listaProdutos.put(text, new Produtos(text));
+        contabilidade.inicia_hash(text);
         //System.out.println(text);
     }
          } catch (FileNotFoundException ex) {
@@ -99,6 +100,7 @@ public class GESTHIPER implements Serializable{
         parse_compra(text);
     }
     catalogoCompras.preenche_tree();
+    contabilidade.preenche_tree();
          } catch (FileNotFoundException ex) {
              Logger.getLogger(GESTHIPER.class.getName()).log(Level.SEVERE, null, ex);
          } catch (IOException ex) {
@@ -173,7 +175,11 @@ public class GESTHIPER implements Serializable{
             main.carrega_compras(compras);
             //main.catalogoCompras.query_2();
             //System.out.println(main.catalogoCompras.mes_facturado[1]);
-            main.catalogoCompras.query3(1);
+            //main.catalogoCompras.query7("CK166");
+            //main.contabilidade.query8(20);
+            //main.catalogoCompras.query9(20);
+            //main.contabilidade.query6("XN1084");
+            main.contabilidade.query10("BZ5018", 20);
             //System.out.println("Comprás inválidas:" + main.comprasInvalidas.size());
         } 
             

@@ -5,6 +5,7 @@
  */
 package gesthiper;
 
+import gesthiper.ComprasClientes.wrapperProdutos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,12 +24,15 @@ public class CatalogoCompras implements Serializable {
        private int comprasMes[];
     private int total_compras;
     private ArrayList<TreeSet<ComprasClientes>> setComprasClientes;
+    
+   private TreeSet<ComprasClientes> treeDistintos;
     public float total_facturado;
     public float mes_facturado[];
 
     public CatalogoCompras() {
         hashComprasClientes = new ArrayList();
          setComprasClientes = new ArrayList();
+         this.treeDistintos = new TreeSet<>(new comprasClientesDistintosComparator());
         comprasMes = new int[13];
         mes_facturado = new float[13];
         total_compras = 0;
@@ -49,6 +53,22 @@ public class CatalogoCompras implements Serializable {
 
     public void setComprasMes(int[] comprasMes) {
         this.comprasMes = comprasMes;
+    }
+    
+    public void query9(int x){
+        int i = 0;
+        ArrayList<String> lista = new ArrayList<>();
+        int clientes_distintos[] = new int[x];
+        TreeSet compras_aux = treeDistintos;
+        Iterator<ComprasClientes> it = compras_aux.descendingIterator();
+        while(i<x && it.hasNext()){
+            ComprasClientes cc = it.next();
+            lista.add(cc.getId_cliente());
+            clientes_distintos[i] = cc.getDistintos();
+            System.out.println(cc.getId_cliente());
+            System.out.println(cc.getDistintos());
+            i++;
+        }
     }
 
     public void insere_compra_cliente(Compra novaCompra) {
@@ -86,6 +106,7 @@ public class CatalogoCompras implements Serializable {
         for (ComprasClientes value : hashComprasClientes.get(12).values()) {
 
             setComprasClientes.get(12).add(value);
+            treeDistintos.add(value);
         }
 
         // System.out.println(setCompras.get(12).toString());
@@ -113,9 +134,10 @@ public class CatalogoCompras implements Serializable {
         HashMap map = hashComprasClientes.get(novo_mes);
         int n_compras = comprasMes[novo_mes];
         int clientes_distintos = map.size();
-        System.out.println(n_compras);
-                System.out.println(clientes_distintos);
+       
     }
+    
+    
 
     public void query4(String cliente) {
 
@@ -131,9 +153,31 @@ public class CatalogoCompras implements Serializable {
                 n_produtos = map.get(cliente).getProdutosComprados().size();
                 facturado = map.get(cliente).total_facturado;
                 t_facturado += map.get(cliente).total_facturado;
+                
             }
+            i++;
         }
 
+    }
+    
+    public void query7(String id_cliente){
+        
+        List<wrapperProdutos> lista = new ArrayList<>();
+        for(wrapperProdutos c: hashComprasClientes.get(12).get(id_cliente).getProdutosComprados().values()){
+            lista.add(c);
+        }
+        Collections.sort(lista,new Comparator<wrapperProdutos>(){
+            @Override
+            public int compare(wrapperProdutos c1, wrapperProdutos c2){
+                 int res = c2.quantidade - c1.quantidade;
+            if (res == 0) {
+                res = c1.id_produto.compareTo(c2.id_produto);
+            }
+            return res;
+                    }
+            });
+        
+      
     }
 
     class comprasClientesComparator implements Comparator<ComprasClientes>, Serializable {
@@ -144,6 +188,19 @@ public class CatalogoCompras implements Serializable {
             int res = c2.n_compras - c1.n_compras;
             if (res == 0) {
                 res = c2.getId_cliente().compareTo(c1.getId_cliente());
+            }
+            return res;
+        }
+    }
+    
+     class comprasClientesDistintosComparator implements Comparator<ComprasClientes>, Serializable {
+
+        @Override
+        public int compare(ComprasClientes c1, ComprasClientes c2) {
+
+            int res = c1.getDistintos() - c2.getDistintos();
+            if (res == 0) {
+                res = c1.getId_cliente().compareTo(c2.getId_cliente());
             }
             return res;
         }
