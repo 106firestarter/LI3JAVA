@@ -72,7 +72,7 @@ public class CatalogoCompras implements Serializable {
             System.out.println(cc.getDistintos());
             i++;
         }
-        res9 = new wrapperQuery9(lista, clientes_distintos);
+        res9 = new wrapperQuery9(lista, clientes_distintos, compras_aux.size());
         return res9;
     }
 
@@ -168,7 +168,7 @@ public class CatalogoCompras implements Serializable {
             i++;
         }
         
-        res4 = new wrapperQuery4(n_compras, n_produtos, facturado, total_facturado);
+        res4 = new wrapperQuery4(n_compras, n_produtos, facturado, t_facturado);
         return res4;
     }
     
@@ -192,9 +192,9 @@ public class CatalogoCompras implements Serializable {
       ArrayList<String> res = new ArrayList<>();
       int i = 0;
       int quantos[] = new int[x];
-      while(i<x){
+      while(i<x && i<lista.size()){
           res.add(lista.get(i).getId_produto());
-          quantos[x]=lista.get(i).getQuantidade();
+          quantos[i]=lista.get(i).getQuantidade();
           i++;
       }
       res7 = new wrapperQuery7(res, quantos);

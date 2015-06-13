@@ -144,16 +144,17 @@ public class Contabilidade {
         int i = 0;
         ArrayList<String> lista = new ArrayList<>();
         int clientes_distintos[] = new int[x];
+        int quantidade[] = new int[x];
         TreeSet compras_aux = treeQuantidade;
         Iterator<ComprasProdutos> it = compras_aux.descendingIterator();
         while(i<x && it.hasNext()){
             ComprasProdutos cc = it.next();
             lista.add(cc.getId_produto());
             clientes_distintos[i] = cc.getClientesComprados().size();
-            
+            quantidade[i] = cc.getQuantidade();
             i++;
         }
-        res8 = new wrapperQuery8(lista, clientes_distintos);
+        res8 = new wrapperQuery8(lista, clientes_distintos,quantidade,compras_aux.size());
         return res8;
     }
    
@@ -183,7 +184,7 @@ public class Contabilidade {
              facturacao[i]=lista.get(i).facturacao;
             i++;
         }
-      res10 = new wrapperQuery10(aux, facturacao);
+      res10 = new wrapperQuery10(aux, facturacao,lista.size());
       return res10;
     }
    
@@ -202,8 +203,9 @@ public class Contabilidade {
                 facturado[i] = map.get(produto).total_facturado;
                 t_facturado += map.get(produto).total_facturado;
             }
+            i++;
         }
-res5 = new wrapperQuery5(n_compras, n_produtos, facturado, total_facturado);
+res5 = new wrapperQuery5(n_compras, n_produtos, facturado, t_facturado);
 return res5;
     }
    
