@@ -21,6 +21,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -159,7 +160,10 @@ public class GESTHIPER implements Serializable{
     }
     
     public static void main(String[] args) throws IOException, ClassNotFoundException  {
-       
+            int lifeTime = 1;
+            Scanner input = new Scanner(System.in);
+            String aux;
+            String fileClientes = null, fileCompras = null, fileProdutos = null;
             GESTHIPER main = new GESTHIPER();
             main.listaClientes = new HashMap<>();
             main.listaProdutos = new HashMap<>();
@@ -167,20 +171,135 @@ public class GESTHIPER implements Serializable{
             main.TreeCompras = new TreeSet(new comprasComparator());
             main.catalogoCompras = new CatalogoCompras();
             main.contabilidade = new Contabilidade();
-            String produtos = "FichProdutos.txt";
-            main.carrega_produtos(produtos);
-            String clientes = "FichClientes.txt";
-            main.carrega_clientes(clientes);
-            String compras = "Compras.txt";
-            main.carrega_compras(compras);
+                System.out.println("//***********************************************************************************************************************************\\");
+                System.out.println("//***********************************************************************************************************************************\\");
+                System.out.println("//***                                                          GESTHIPER                                                          ***\\");
+                System.out.println("//***********************************************************************************************************************************\\");
+                System.out.println("//***                                           Deseja carregar os ficheiros default? (s/n)                                       ***\\");
+                System.out.println("//***********************************************************************************************************************************\\");
+                aux = input.nextLine();
+                if( aux.equals("s") ){
+                    fileClientes = "FichClientes.txt";
+                    fileProdutos = "FichProdutos.txt";
+                    fileCompras = "Compras.txt";
+                    
+                }else if ( aux.equals("n") ){
+                    System.out.println("//***********************************************************************************************************************************\\");
+                    System.out.println("//***********************************************************************************************************************************\\");
+                    System.out.println("//***                                                          GESTHIPER                                                          ***\\");
+                    System.out.println("//***********************************************************************************************************************************\\");
+                    System.out.println("//***                                         Introduza o nome do ficheiro para os clientes                                       ***\\");
+                    System.out.println("//***********************************************************************************************************************************\\");
+                    fileClientes = input.nextLine();
+                     System.out.println("//***********************************************************************************************************************************\\");
+                    System.out.println("//***                                         Introduza o nome do ficheiro para os produtos                                       ***\\");
+                    System.out.println("//***********************************************************************************************************************************\\");
+                    fileProdutos = input.nextLine();
+                     System.out.println("//***********************************************************************************************************************************\\");
+                    System.out.println("//***                                          Introduza o nome do ficheiro para as compras                                       ***\\");
+                    System.out.println("//***********************************************************************************************************************************\\");
+                    fileCompras = input.nextLine();
+                }
+            while(lifeTime==1){
+                
+                    
+                    main.carrega_produtos(fileProdutos);
+                    main.carrega_clientes(fileClientes);
+                    main.carrega_compras(fileCompras);
+                
+                System.out.println("//***********************************************************************************************************************************\\");
+                System.out.println("//***********************************************************************************************************************************\\");
+                System.out.println("//***                                                          GESTHIPER                                                          ***\\");
+                System.out.println("//***********************************************************************************************************************************\\");
+                System.out.println("//*** 1- Lista ordenada com os códigos dos produtos nunca comprados e respectivo total.                                           ***\\");
+                System.out.println("//*** 2- Lista ordenada com os códigos dos clientes que nunca compraram e seu total.                                              ***\\");
+                System.out.println("//*** 3- Dado um mês válido, determinar o número total de compras e o total de clientes distintos que as realizaram.              ***\\");
+                System.out.println("//*** 4- Para um cliente, determinar, para cada mês, quantas compras fez, quantos produtos distintos comprou E quanto gastou.     ***\\");
+                System.out.println("//*** 5- Para um produto, determinar, mês a mês, quantas vezes foi comprado, por quantos clientes diferentes e o total facturado. ***\\");
+                System.out.println("//*** 6- Para um produto, determinar, mês a mês, quantas vezes foi comprado em modo N e em modo P e respectivas facturações.      ***\\");
+                System.out.println("//*** 7- Dado o código de um cliente determinar a lista de códigos de produtos que mais comprou (e quantos).                      ***\\");
+                System.out.println("//*** 8- Determinar os X produtos mais vendidos em todo o ano e o número total de distintos clientes que o compraram.             ***\\");
+                System.out.println("//*** 9- Determinar os X clientes que compraram um maior número de diferentes produtos indicando quantos.                         ***\\");
+                System.out.println("//*** 10- Dado o código de um produto, determinar o conjunto dos X clientes que mais o compraram.                                 ***\\");
+                System.out.println("//***********************************************************************************************************************************\\");
+                System.out.println("//***********************************************************************************************************************************\\");
+                
+               aux = input.nextLine();
+               
+               if(aux.equals("1")){
+                  
+                    
+               }else if (aux.equals("2")){
+                   
+               
+               }else if (aux.equals("3")){
+              System.out.println("//***********************************************************************************************************************************\\");
+              System.out.println("//***                                           Por favor insira um mês válido.                                                   ***\\");
+              System.out.println("//***********************************************************************************************************************************\\");
+              aux = input.nextLine();
+              System.out.println(aux);
+                   
+               }else if (aux.equals("4")){
+              System.out.println("//***********************************************************************************************************************************\\");
+              System.out.println("//***                                    Por favor indique um código de cliente válido.                                           ***\\");
+              System.out.println("//***********************************************************************************************************************************\\");
+              aux = input.nextLine();   
+                   
+                   
+               }else if (aux.equals("5")){
+              System.out.println("//***********************************************************************************************************************************\\");
+              System.out.println("//***                                    Por favor indique um código de produto válido.                                            ***\\");
+              System.out.println("//***********************************************************************************************************************************\\");
+              aux = input.nextLine();  
+                   
+                   
+               }else if (aux.equals("6")){
+              System.out.println("//***********************************************************************************************************************************\\");
+              System.out.println("//***                                    Por favor indique um código de produto válido.                                            ***\\");
+              System.out.println("//***********************************************************************************************************************************\\");
+              aux = input.nextLine();   
+                   
+                   
+               }else if (aux.equals("7")){
+                   
+                   
+                   
+               }else if (aux.equals("8")){
+                  
+                   
+                   
+               }else if (aux.equals("9")){
+                  
+                   
+                   
+               }else if (aux.equals("10")){
+                   
+                   
+                   
+               }else if (aux.equals("q")){
+                   lifeTime = 0;
+                   
+                   
+               }
+               
+               
+                    
+
+            
+
+            
             //main.catalogoCompras.query_2();
             //System.out.println(main.catalogoCompras.mes_facturado[1]);
             //main.catalogoCompras.query7("CK166");
             //main.contabilidade.query8(20);
             //main.catalogoCompras.query9(20);
             //main.contabilidade.query6("XN1084");
-            main.contabilidade.query10("BZ5018", 20);
-            //System.out.println("Comprás inválidas:" + main.comprasInvalidas.size());
+            //main.contabilidade.query10("BZ5018", 20);
+            //System.out.println("Comprás inválidas:" + main.comprasInvalidas.size());    
+            
+            
+            
+            }
         } 
             
             
