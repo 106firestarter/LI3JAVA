@@ -82,24 +82,31 @@ public class Contabilidade {
         }
     }
    
-   public void query6(String id_produto){
-       int n;
-       int p;
+   public wrapperQuery6 query6(String id_produto){
+       wrapperQuery6 res6;
+       int n[]  = new int[12];
+       float fn[] = new float[12];
+       float fp[] = new float[12];
+       int p[] = new int[12];
+       
        int i = 0;
        while(i<12){
            if(hashComprasProdutos.get(i).containsKey(id_produto)){
-               n = hashComprasProdutos.get(i).get(id_produto).getN();
-               p = hashComprasProdutos.get(i).get(id_produto).getP();
-               System.out.println(n);
-               System.out.println(p);
-               System.out.println("-------");
+               n[i] = hashComprasProdutos.get(i).get(id_produto).getN();
+               p[i] = hashComprasProdutos.get(i).get(id_produto).getP();
+               fn[i] = hashComprasProdutos.get(i).get(id_produto).getTotal_facturado();
+               
+               fp[i] = hashComprasProdutos.get(i).get(id_produto).getTotal_facturado();
+             
            }
            else{
-               n = 0;
-               p = 0;
+               n[i] = 0;
+               p[i] = 0;
            }
            i++;
        }
+       res6 = new wrapperQuery6(n, p, fn, fp);
+       return res6;
    }
    
    public void inicia_hash(String id_produto){
@@ -180,23 +187,24 @@ public class Contabilidade {
       return res10;
     }
    
-   public void query5(String produto) {
-
+   public wrapperQuery5 query5(String produto) {
+       wrapperQuery5 res5;
         int i = 0;
-        int n_produtos;
-        int n_compras;
-        float facturado;
+        int n_produtos[] = new int[12];
+        int n_compras[] = new int[12];
+        float facturado[] = new float[12];
         float t_facturado = 0;
         while (i < 12) {
             HashMap<String,ComprasProdutos> map = hashComprasProdutos.get(i);
             if (map.containsKey(produto)) {
-                n_compras = map.get(produto).getN_compras();
-                n_produtos = map.get(produto).getClientesComprados().size();
-                facturado = map.get(produto).total_facturado;
+                n_compras[i] = map.get(produto).getN_compras();
+                n_produtos[i] = map.get(produto).getClientesComprados().size();
+                facturado[i] = map.get(produto).total_facturado;
                 t_facturado += map.get(produto).total_facturado;
             }
         }
-
+res5 = new wrapperQuery5(n_compras, n_produtos, facturado, total_facturado);
+return res5;
     }
    
    class comprasProdutosComparator implements Comparator<ComprasProdutos>, Serializable {

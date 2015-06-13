@@ -151,7 +151,10 @@ public class ComprasClientes implements Serializable {
     }
     
     
-    
+    @Override
+    public int hashCode() {
+ return Arrays.hashCode( new Object[] { this.distintos,this.id_cliente,this.n_compras,this.produtosComprados,this.total_facturado } );
+ }
 
     @Override
     public String toString() {

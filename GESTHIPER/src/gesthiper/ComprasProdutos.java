@@ -6,6 +6,7 @@
 package gesthiper;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
@@ -148,7 +149,10 @@ public class ComprasProdutos implements Serializable {
     }
     
     
-    
+    @Override
+    public int hashCode() {
+ return Arrays.hashCode( new Object[] { this.distintos,this.id_produto,this.n_compras,this.clientesComprados,this.total_facturado,this.n,this.p,this.quantidade } );
+ }
     
 
     @Override

@@ -22,6 +22,14 @@ public class Wrappers {
             this.total = total;
         }
         
+        public String getProduto(int i){
+            return this.produtos.get(i);
+        }
+        
+        public int getTotal(){
+            return this.total;
+        }
+        
         
     }
     public static class wrapperQuery2{
@@ -76,14 +84,14 @@ public class Wrappers {
     }
     
      public static class wrapperQuery6{
-        private int total_compras[];
-        private int clientes_distintos[];        
+        private int total_n[];
+        private int total_p[];        
         private float facturado_p[];
         private float facturado_n[];
 
         public wrapperQuery6(int[] total_compras, int[] clientes_distintos, float[] facturado_p, float[] facturado_n) {
-            this.total_compras = total_compras;
-            this.clientes_distintos = clientes_distintos;
+            this.total_n = total_compras;
+            this.total_p = clientes_distintos;
             this.facturado_p = facturado_p;
             this.facturado_n = facturado_n;
         }

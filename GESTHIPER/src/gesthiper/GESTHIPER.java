@@ -5,6 +5,7 @@
  */
 package gesthiper;
 
+import gesthiper.Wrappers.*;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -148,6 +149,15 @@ public class GESTHIPER implements Serializable{
         
     }
     
+    public void imprime_menu(ArrayList<String> lista,int x){
+        int i = x;
+        
+        while(i<x+10){
+            System.out.println(lista.get(i));
+            i++;
+        }
+    }
+    
     public void grava_ficheiro(GESTHIPER main, String ficheiro) throws FileNotFoundException, IOException{
         
          FileOutputStream baos = new FileOutputStream(ficheiro);
@@ -227,30 +237,33 @@ public class GESTHIPER implements Serializable{
                aux = input.nextLine();
                
                if(aux.equals("1")){
+                  wrapperQuery1 res1 = main.contabilidade.query_1();
                   
-                    
                }else if (aux.equals("2")){
-                   
+                   wrapperQuery2 res2 = main.catalogoCompras.query_2();
                
                }else if (aux.equals("3")){
               System.out.println("//***********************************************************************************************************************************\\");
               System.out.println("//***                                           Por favor insira um mês válido.                                                   ***\\");
               System.out.println("//***********************************************************************************************************************************\\");
               aux = input.nextLine();
+              wrapperQuery3 res3 = main.catalogoCompras.query3(Integer.parseInt(aux));
               System.out.println(aux);
                    
                }else if (aux.equals("4")){
               System.out.println("//***********************************************************************************************************************************\\");
               System.out.println("//***                                    Por favor indique um código de cliente válido.                                           ***\\");
               System.out.println("//***********************************************************************************************************************************\\");
+              
               aux = input.nextLine();   
-                   
+              wrapperQuery4 res4 = main.catalogoCompras.query4(aux);
                    
                }else if (aux.equals("5")){
               System.out.println("//***********************************************************************************************************************************\\");
               System.out.println("//***                                    Por favor indique um código de produto válido.                                            ***\\");
               System.out.println("//***********************************************************************************************************************************\\");
               aux = input.nextLine();  
+              wrapperQuery5 res5 = main.contabilidade.query5(aux);
                    
                    
                }else if (aux.equals("6")){
@@ -258,23 +271,29 @@ public class GESTHIPER implements Serializable{
               System.out.println("//***                                    Por favor indique um código de produto válido.                                            ***\\");
               System.out.println("//***********************************************************************************************************************************\\");
               aux = input.nextLine();   
-                   
+                   wrapperQuery6 res6 = main.contabilidade.query6(aux);
                    
                }else if (aux.equals("7")){
-                   
+                   aux = input.nextLine();
+                   String aux1 = input.nextLine();   
+                   wrapperQuery7 res7 = main.catalogoCompras.query7(aux,Integer.parseInt(aux1) );
                    
                    
                }else if (aux.equals("8")){
-                  
+                   aux = input.nextLine();
+                  wrapperQuery8 res8 = main.contabilidade.query8(Integer.parseInt(aux));
                    
                    
                }else if (aux.equals("9")){
-                  
+                   aux = input.nextLine();
+                  wrapperQuery9 res9 = main.catalogoCompras.query9(Integer.parseInt(aux));
                    
                    
                }else if (aux.equals("10")){
                    
-                   
+                   aux = input.nextLine();
+                 String aux1 = input.nextLine();
+                 wrapperQuery10 res10 = main.contabilidade.query10(aux,Integer.parseInt(aux1) );
                    
                }else if (aux.equals("q")){
                    lifeTime = 0;

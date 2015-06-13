@@ -2,6 +2,7 @@
 package gesthiper;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Produtos implements Serializable {
     
@@ -21,6 +22,11 @@ public class Produtos implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+    
+      @Override
+    public int hashCode() {
+ return Arrays.hashCode( new Object[] { this.id } );
+ }
 
     @Override
     public String toString() {

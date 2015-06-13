@@ -226,6 +226,8 @@ public class CatalogoCompras implements Serializable {
             return res;
         }
     }
+     
+     
 
     @Override
     public String toString() {
